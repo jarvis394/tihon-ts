@@ -1,0 +1,52 @@
+{
+  "name": "tihon",
+  "version": "9.0.0",
+  "description": "Development side of strange villager that tells you something random 🤔",
+  "main": "dist/index.js",
+  "scripts": {
+    "start": "npm run start:dev",
+    "start:dev": "ts-node src/index.ts",
+    "start:prod": "node .",
+    "build": "tsc -b",
+    "test": "jest",
+    "lint": "npm run lint:eslint && npm run lint:prettier",
+    "lint:eslint": "eslint . --fix",
+    "lint:prettier": "prettier src/**/{.[^.],}* --config .prettierrc --write"
+  },
+  "dependencies": {
+    "@hapi/joi": "^16.1.7",
+    "better-sqlite3": "^5.4.3",
+    "body-parser": "^1.19.0",
+    "chalk": "^2.4.2",
+    "dotenv": "^8.2.0",
+    "hashids": "^2.1.0",
+    "is-url": "^1.2.4",
+    "moment": "^2.24.0",
+    "reverse-line-reader": "^0.2.6",
+    "vk-io": "^4.0.0-rc.20",
+    "winston": "^3.2.1"
+  },
+  "engines": {
+    "node": "12.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-express"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ],
+  "devDependencies": {
+    "@types/better-sqlite3": "^5.4.0",
+    "@types/express": "^4.17.2",
+    "@types/hapi__joi": "^16.0.2",
+    "@types/node": "^12.12.7",
+    "eslint": "^6.6.0",
+    "express": "^4.17.1",
+    "prettier": "^1.18.2",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
+  }
+}
