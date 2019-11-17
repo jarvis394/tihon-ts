@@ -1,51 +1,40 @@
-const blacklist = require('../config/blacklist')
-const { ID } = require('../config/constants')
-const commandLogger = require('../lib/structures/CommandLogger')
-const { randomArray } = require('./random')
-const isUrl = require('./isUrl')
-const dataUtils = require('./data')
-const { db } = require('../globals')
+import * as blacklist from '../config/blacklist'
+import { ID } from '../config/constants'
+import commandLogger from '../structures/CommandLogger'
+import { randomArray } from './random'
+import isUrl from './isUrl'
+import * as dataUtils from './data'
+import db from '../globals/database'
+import { Attachment } from 'vk-io'
+import { IMessageContextPayload } from 'vk-io/lib/structures/contexts/message'
 
 /**
  * Returns random message from multidialogs
  *
  * @returns {object} Message object
  */
-export default async (): Promise<{ text: string }> => {
-  // Testing functions
-  const isEmpty = m => !m.text
-  const hasLink = m => m.text.split(' ').some(t => isUrl(t))
-  const startsWithPhone = m => m.text.split(' ').some(t => t.startsWith('+7'))
-  const isCommandMessage = m => m.text.split(' ').some(t => t.startsWith('/'))
-  const isErrorMessage = m =>
-    m.text.split(' ').some(t => t.startsWith('АШИБКА РИП'))
-  const isLong = m => m.text.length > 200
-  const isSelf = m => m.from_id.toString() === ID.toString()
-  const hasMention = m =>
-    m.text.split(' ').some(t => t.startsWith('[id') || t.startsWith('[club'))
-  const isFromGroup = m => m.from_id < 0
-
-  function testMessage(m) {
+export default async (): Promise<IMessageContextPayload['message']> => {
+  const testMessage = (m: IMessageContextPayload['message']) => {
     if (!m) return true
 
     return (
-      isEmpty(m) ||
-      hasLink(m) ||
-      startsWithPhone(m) ||
-      isCommandMessage(m) ||
-      isErrorMessage(m) ||
-      isLong(m) ||
-      isSelf(m) ||
-      hasMention(m) ||
-      isFromGroup(m)
+      !m.text ||
+      m.text.split(' ').some(t => isUrl(t)) ||
+      m.text.split(' ').some(t => t.startsWith('+7')) ||
+      m.text.split(' ').some(t => t.startsWith('/')) ||
+      m.text.split(' ').some(t => t.startsWith('🔻')) ||
+      m.text.length > 200 ||
+      m.from_id.toString() === ID.toString() ||
+      m.text.split(' ').some(t => t.startsWith('[id') || t.startsWith('[club')) ||
+      m.from_id < 0
     )
   }
 
-  function testAttachments(m) {
+  const testAttachments = (m: IMessageContextPayload['message']) => {
     let flag = false
 
-    m.attachments.forEach(a => {
-      if (blacklist.USERS.includes(e => e === a[a.type].owner_id.toString())) {
+    m.attachments.forEach((a: Attachment) => {
+      if (blacklist.USERS.some((e: number) => e === a[a.type].owner_id.toString())) {
         flag = true
       }
     })
@@ -53,17 +42,19 @@ export default async (): Promise<{ text: string }> => {
     return flag
   }
 
-  function canRead(m) {
+  const canRead = (m: IMessageContextPayload['message']) => {
     const data = db
       .prepare(`SELECT * FROM main.dialogs WHERE id = ${m.peer_id}`)
       .get()
 
     if (data) {
       return data.canReadMessages === 'true'
+    } else {
+      return true
     }
   }
 
-  async function getMsg() {
+  function getMsg() {
     const histories = dataUtils.getHistories()
     const dialogHistory = randomArray(histories)
     const message = randomArray(dialogHistory.items)
@@ -71,13 +62,16 @@ export default async (): Promise<{ text: string }> => {
     return message
   }
 
-  let msg = await getMsg()
+  let msg = getMsg()
+  let i: number = 0
 
-  while (testMessage(msg) || testAttachments(msg) /* || !canRead(msg)*/) {
-    msg = await getMsg()
+  while ((testMessage(msg) || testAttachments(msg) /*|| !canRead(msg)*/) && i < 10) {
+    msg = getMsg()
+    i++
   }
 
   // Log message to command.log
+  // @ts-ignore
   commandLogger.random({
     message: msg,
   })

@@ -1,5 +1,5 @@
-import handleError from '../../../utils/handleError'
-import ICommand from '../../../interfaces/Command'
+import handleError from '@utils/handleError'
+import ICommand from '@interfaces/Command'
 import { MessageContext } from 'vk-io'
 
 export default async (update: MessageContext): Promise<number | void> => {
@@ -9,7 +9,7 @@ export default async (update: MessageContext): Promise<number | void> => {
   // Try running command file
   try {
     // Require command
-    const command: ICommand = require(`../../../commands/${cmd.group}/${cmd.name}`)
+    const command: ICommand = require(`@commands/${cmd.group}/${cmd.name}`)
 
     // Run asynchronously
     return await command.run({ update, args })

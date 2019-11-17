@@ -1,6 +1,6 @@
-const db = require('../globals/database')
+import db from '../globals/database'
 
-module.exports = () =>
+export default () =>
   db
     .prepare('SELECT * FROM main.guilds ORDER BY reputation DESC LIMIT 100;')
     .all()

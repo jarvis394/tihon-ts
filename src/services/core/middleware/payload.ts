@@ -1,6 +1,6 @@
-import { PREFIX, MENTION_PREFIX } from '../../../config/constants'
-import commands from '../../../globals/commands'
-import isAdmin from '../../../utils/isAdmin'
+import { PREFIX, MENTION_PREFIX } from '@config/constants'
+import commands from '@globals/commands'
+import isAdmin from '@utils/isAdmin'
 import { MessageContext } from 'vk-io'
 
 export default async (

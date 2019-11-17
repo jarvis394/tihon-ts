@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-const COMMANDS_PATH: string = path.resolve(process.cwd(), 'src/commands')
+const COMMANDS_PATH: string = path.join(__dirname, '..', 'commands')
 
 let commands = []
 fs.readdirSync(COMMANDS_PATH).forEach(group => {

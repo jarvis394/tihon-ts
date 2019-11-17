@@ -1,6 +1,6 @@
-import handleError from '../../../utils/handleError'
-import { sessionStorage } from '../../../globals/storages'
-import ICommand from '../../../interfaces/Command'
+import handleError from '@utils/handleError'
+import { sessionStorage } from '@globals/storages'
+import ICommand from '@interfaces/Command'
 import { MessageContext } from 'vk-io'
 
 export default async (
@@ -18,7 +18,7 @@ export default async (
 
     if (count % 25 === 0) {
       try {
-        const cmd: ICommand = require('../../../commands/random/random')
+        const cmd: ICommand = require('@commands/random/random')
         await cmd.run({ update })
       } catch (e) {
         handleError(update, e)

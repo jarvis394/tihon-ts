@@ -1,5 +1,5 @@
-import User from '../../../models/User'
-import { IUser } from '../../../interfaces/User'
+import User from '@models/User'
+import { IUser } from '@interfaces/User'
 import { MessageContext } from 'vk-io'
 
 export default async (
@@ -9,7 +9,7 @@ export default async (
   const { senderId } = update
 
   if (update.isInbox && senderId > 0) {
-    const user: User = new User(senderId)
+    const user: IUser = new User(senderId)
 
     user.add(1)
   }

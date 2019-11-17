@@ -1,19 +1,15 @@
-const { random } = require('../utils/random')
-const fs = require('fs')
-const path = require('path')
-const promos = require('../config/data/promo')
+import { random } from './random'
+import fs from 'fs'
+import path from 'path'
+import promos from '../config/data/promo'
+import log from '../globals/log'
 
-const promoFunction = async (f, u) => {
-  await f(u)
-  return true
-}
+export const promoFunction = (f: (u: any) => void, u: any) => f(u)
 
 /**
  * Generates promo
  */
-const generate = () => {
-  const { log } = require('../globals')
-
+export const generate = () => {
   const key = random(10000000, 99999999)
   const n = random(0, promos.length - 1)
   const promo = promos[n]
@@ -44,10 +40,8 @@ const generate = () => {
 /**
  * Gets current promo
  */
-const getPromo = () => {
-  const { log } = require('../globals')
-
-  let data
+export const getPromo = () => {
+  let data: Record<string, any>
 
   try {
     data = require('../temp/promo.json')
@@ -63,10 +57,4 @@ const getPromo = () => {
   }
 
   return data
-}
-
-module.exports = {
-  promoFunction,
-  generate,
-  getPromo,
 }

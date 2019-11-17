@@ -1,9 +1,9 @@
 import { MessageContext } from 'vk-io'
-import { COMMAND_COOLDOWN } from '../../../config/constants'
-import { memoryStorage, talkedRecently } from '../../../globals/storages'
+import { COMMAND_COOLDOWN } from '@config/constants'
+import { talkedRecently } from '@globals/storages'
 
 export default async (update: MessageContext, next: Function) => {
-  const { peerId, senderId, state } = update
+  const { senderId, state } = update
 
   if (state.isCommand) {
     // Return if user has used command recently
@@ -13,13 +13,6 @@ export default async (update: MessageContext, next: Function) => {
     talkedRecently.add(senderId)
     setTimeout(() => talkedRecently.delete(senderId), COMMAND_COOLDOWN)
   }
-
-  // Get session
-  /*  const session = memoryStorage.has(peerId) ? memoryStorage.get(peerId) : {};
-  update.session = session;
-
-  // Set session to the storage
-  memoryStorage.set(peerId, session);*/
 
   await next()
 }

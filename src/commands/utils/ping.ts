@@ -1,4 +1,4 @@
-exports.run = async () => {
+export const run = async ({ update }) => {
   const replies = [
     'Шо ты меня пингуешь братец',
     'А?',
@@ -8,10 +8,10 @@ exports.run = async () => {
   ]
   const { randomArray } = require('../../utils/random')
 
-  return randomArray(replies)
+  update.reply(randomArray(replies))
 }
 
-exports.command = {
+export const command = {
   name: 'ping',
   arguments: false,
   description: {
