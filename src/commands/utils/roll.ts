@@ -1,6 +1,6 @@
-exports.run = async ({ args }) => {
-  const { random } = require('../../utils/random')
+import { random } from '../../utils/random'
 
+export const run = async ({ update, args }) => {
   let res = random(0, 100)
 
   if (args[0] && !args[1] && !isNaN(args[0])) {
@@ -9,10 +9,10 @@ exports.run = async ({ args }) => {
     res = random(args[0], args[1])
   }
 
-  return res
+  return update.reply(res)
 }
 
-exports.command = {
+export const command = {
   name: 'roll',
   arguments: '(min) (max)|(min) (max)',
   description: {

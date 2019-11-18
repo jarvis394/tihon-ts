@@ -1,21 +1,25 @@
-exports.run = async ({ update, args }) => {
-  const math = require('mathjs')
+import * as math from 'mathjs'
 
-  var resp
-  var calc = args.join(' ')
+export const run = async ({ update, args }) => {
+  let resp: string
+  let calc = args.join(' ')
 
+  // Run calculation in try...catch
   try {
     resp = math.evaluate(calc)
   } catch (e) {
     throw new Error('Похоже, я слишком тупой для таких примеров')
   }
 
-  return `📥 Ввод: ${calc}\n📤 Вывод: ${resp}`
+  return update.reply(`📥 Ввод: ${calc}\n📤 Вывод: ${resp}`)
 }
 
-exports.command = {
+export const command = {
   name: 'calc',
-  arguments: '(expression)|(выражение)',
+  arguments: {
+    ru: '',
+    en: '',
+  },
   description: {
     en: 'Calculate something',
     ru: 'Посчитать матан',

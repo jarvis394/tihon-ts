@@ -1,4 +1,4 @@
-import log from '@globals/log'
+import log from '../../../globals/log'
 import { MessageContext } from 'vk-io'
 
 export default (update: MessageContext): void => {

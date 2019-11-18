@@ -1,8 +1,8 @@
-exports.run = async ({ update, args }) => {
-  return `Счётчик: (${update.state.session.counter})`
+export const run = async ({ update }) => {
+  return update.reply(`Счётчик: (${update.state.session.counter})`)
 }
 
-exports.command = {
+export const command = {
   name: 'counter',
   arguments: false,
   description: {

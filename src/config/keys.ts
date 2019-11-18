@@ -11,4 +11,4 @@ export const SECRET: string = process.env.SECRET
 /**
  * Web port
  */
-export const PORT: number = 443
+export const PORT: number = Number(process.env.PORT)

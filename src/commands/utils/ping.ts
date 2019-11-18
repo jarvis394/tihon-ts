@@ -8,7 +8,7 @@ export const run = async ({ update }) => {
   ]
   const { randomArray } = require('../../utils/random')
 
-  update.reply(randomArray(replies))
+  return update.reply(randomArray(replies))
 }
 
 export const command = {
