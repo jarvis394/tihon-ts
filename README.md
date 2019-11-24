@@ -1,24 +1,59 @@
-# Welcome to Glitch
+# Grandpa Tihon
 
-Click `Show` in the header to see your app live. Updates to your code will instantly deploy and update live.
+> A bot that sends incomprehensible crap into a conversation, and even randomly. From the village, what to say.
 
-**Glitch** is the friendly community where you'll build the app of your dreams. Glitch lets you instantly create, remix, edit, and host an app, bot or site, and you can invite collaborators or helpers to simultaneously edit code with you.
+##### _- [Vatslav Tarnatovski](https://vk.com/tarnatovski)_
 
-Find out more [about Glitch](https://glitch.com/about).
+## Usage
 
-## Your Project
+To add bot, go to [VK userpage](https://vk.com/tihon_bot) and add **bot to friends list**.
+Then, you can actually start using bot by typing commands, starting with `/` or `@tihon_bot`.
 
-On the front-end,
+## Commands
 
-- edit `public/client.js`, `public/style.css` and `views/index.html`
-- drag in `assets`, like images or music, to add them to your project
+~~See [bot's website](https://dedtihon.cf)~~
 
-On the back-end,
+## Running
 
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
-- safely store app secrets in `.env` (nobody can see this but you and people you invite)
+```
+git clone https://github.com/jarvis394/tihon
+cd tihon
+npm install
+```
 
-## Made by [Glitch](https://glitch.com/)
+**IMPORTANT!** After these steps you must provide **USER**'s VK API token and other enviroment constants in `.env`. Then just type
 
-\ ゜ o ゜)ノ
+```
+npm start
+```
+
+to run bot by yourself.
+
+## Todo
+
+Global:
+
+- ~~Learn TypeScript to get rid of some checking~~
+- ~~Make an API~~
+- Translate everything to English, even `/random`
+
+Needed:
+- ~~Add unified timeouts for commands~~
+- Get results of every command written with command log
+- Log data changes for debugging
+- Recursively check commands filetree to get **`parents`** and **`children`** of commands.
+  For example,
+
+  ```javascript
+  // Parent
+  - guild/
+
+    // Children
+    - create { aliases: [ ...] }
+    - leave { aliases: [ ... ] }
+    ...
+  ```
+  
+## Credits
+
+My VK: [@tarnatovski](https://vk.com/tarnatovski)
