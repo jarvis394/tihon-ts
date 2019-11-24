@@ -1,4 +1,4 @@
-import vk from '@globals/vk'
+import { vk } from '../../../globals/vk'
 import mention from './mention'
 import runCommand from './command'
 import log from './log'

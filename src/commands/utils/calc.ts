@@ -15,7 +15,10 @@ export const run = async ({ update, args }) => {
 
 export const command = {
   name: 'calc',
-  arguments: '(expression)|(выражение)',
+  arguments: {
+    ru: '',
+    en: '',
+  },
   description: {
     en: 'Calculate something',
     ru: 'Посчитать матан',

@@ -22,5 +22,5 @@
       "@commands/*": ["./src/commands/*"]
     }
   },
-  "exclude": ["node_modules", "dist", "**/*.spec.ts"]
+  "exclude": ["node_modules", "dist", "**/*.test.(t|j)s"]
 }

@@ -1,5 +1,5 @@
 import { MessageContext } from 'vk-io'
-import { timeouts } from '@globals/storages'
+import { timeouts } from '../../../globals/storages'
 import moment from 'moment'
 
 moment.locale('ru')

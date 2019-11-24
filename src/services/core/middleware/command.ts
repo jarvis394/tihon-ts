@@ -1,5 +1,5 @@
-import handleError from '@utils/handleError'
-import ICommand from '@interfaces/Command'
+import handleError from '../../../utils/handleError'
+import ICommand from '../../../interfaces/Command'
 import { MessageContext } from 'vk-io'
 
 export default async (update: MessageContext): Promise<number | void> => {
