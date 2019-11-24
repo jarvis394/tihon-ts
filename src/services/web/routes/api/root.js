@@ -1,5 +1,5 @@
 const express = require('express')
-const { commands } = require('../../../../globals/commands')
+const commands = require('../../../../globals/commands')
 const { SECRET } = require('../../../../config/keys')
 const promo = require('../../../../utils/promo')
 const randomMessage = require('../../../../utils/randomMessage')

@@ -1,8 +1,8 @@
 import { random } from './random'
 import fs from 'fs'
 import path from 'path'
-import promos from '../config/data/promo'
-import log from '../globals/log'
+import promos from '@config/data/promo'
+import log from '@globals/log'
 
 export const promoFunction = (f: (u: any) => void, u: any) => f(u)
 

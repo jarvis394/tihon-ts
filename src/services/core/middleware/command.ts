@@ -9,7 +9,7 @@ export default async (update: MessageContext): Promise<number | void> => {
   // Try running command file
   try {
     // Require command
-    const command: ICommand = require(`@commands/${cmd.group}/${cmd.name}`)
+    const command: ICommand = require(`../../../commands/${cmd.group}/${cmd.name}`)
 
     // Run asynchronously
     return await command.run({ update, args })
@@ -18,7 +18,7 @@ export default async (update: MessageContext): Promise<number | void> => {
     // Actually, the 'filter' middleware filters any non-command
     // message, so there is probably 0% chance of getting this error.
     // Who knows...
-    if (e.code === 'MODULE_NOT_FOUND') return
+    if (e.code === 'MODULE_NOT_FOUND') return console.error(e)
     // In other case, handle this error
     else return handleError(update, e)
   }

@@ -8,17 +8,18 @@
     "target": "es2017",
     "sourceMap": false,
     "outDir": "./dist",
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "incremental": false,
     "allowJs": true,
     "paths": {
-      "@config/*": ["config/*"],
-      "@globals/*": ["globals/*"],
-      "@models/*": ["models/*"],
-      "@interfaces/*": ["interfaces/*"],
-      "@structures/*": ["structures/*"],
-      "@utils/*": ["utils/*"],
-      "@commands/*": ["commands/*"]
+      "@config/*": ["./src/config/*"],
+      "@globals/*": ["./src/globals/*"],
+      "@models/*": ["./src/models/*"],
+      "@interfaces/*": ["./src/interfaces/*"],
+      "@interfaces": ["./src/interfaces"],
+      "@structures/*": ["./src/structures/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@commands/*": ["./src/commands/*"]
     }
   },
   "exclude": ["node_modules", "dist", "**/*.spec.ts"]

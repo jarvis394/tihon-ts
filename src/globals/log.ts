@@ -1,7 +1,7 @@
 import { createLogger, format, transports } from 'winston'
 
 const { combine, timestamp, splat, json, errors, simple, printf } = format
-const { COLORS, LEVELS } = require('../config/logger')
+import { COLORS, LEVELS } from '../config/logger'
 
 const ignorePrivate = format(info => {
   if (info.private) return false

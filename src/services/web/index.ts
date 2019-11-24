@@ -1,8 +1,8 @@
 import * as express from 'express'
 import bodyParser from 'body-parser'
-import { PORT } from '../../config/keys'
-import log from '../../globals/log'
-import app from '../../globals/express'
+import { PORT } from '@config/keys'
+import log from '@globals/log'
+import app from '@globals/express'
 
 // Middlewares
 app.use(express.static('logs'))

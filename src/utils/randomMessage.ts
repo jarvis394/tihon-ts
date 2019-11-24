@@ -1,10 +1,10 @@
-import * as blacklist from '../config/blacklist'
-import { ID } from '../config/constants'
+import * as blacklist from '@config/blacklist'
+import { ID } from '@config/constants'
 import commandLogger from '../structures/CommandLogger'
 import { randomArray } from './random'
 import isUrl from './isUrl'
 import * as dataUtils from './data'
-import db from '../globals/database'
+import db from '@globals/database'
 import { Attachment } from 'vk-io'
 import { IMessageContextPayload } from 'vk-io/lib/structures/contexts/message'
 

@@ -1,4 +1,4 @@
-import db from '../globals/database'
+import db from '@globals/database'
 
 export default () =>
   db

@@ -1,11 +1,11 @@
-import db from '../globals/database'
-import vk from '../globals/vk'
+import db from '@globals/database'
+import vk from '@globals/vk'
 import Database from 'better-sqlite3'
-import { IUser, IUserModel, IUsersGetModel } from '../interfaces/User'
-import { Item as IItem, Pet as IPet, Group } from '../interfaces'
-import getUsersTop from '../utils/getUsersTop'
-import { getGroupByItemId } from '../utils/shop'
-import { USER as defaultData } from '../config/defaultData'
+import { IUser, IUserModel, IUsersGetModel } from '@interfaces/User'
+import { Item as IItem, Pet as IPet } from '@interfaces'
+import getUsersTop from '@utils/getUsersTop'
+import { getGroupByItemId } from '@utils/shop'
+import { USER as defaultData } from '@config/defaultData'
 import { UsersGetParams } from 'vk-io/lib/api/schemas/params'
 
 const { api } = vk

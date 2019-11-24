@@ -1,5 +1,5 @@
 env: 
-  browser: true
+  browser: false
   commonjs: true
   es6: true
   node: true
@@ -8,6 +8,7 @@ globals:
   Atomics: 'readonly'
   SharedArrayBuffer: 'readonly'
 parserOptions: 
+  sourceType: module
   ecmaVersion: 2018
 rules: 
   no-console: 'off'
