@@ -11,7 +11,7 @@ Then, you can actually start using bot by typing commands, starting with `/` or 
 
 ## Commands
 
-~~See [bot's website](https://dedtihon.cf)~~
+See [bot's website](https://dedtihon.cf/commands)
 
 ## Running
 
