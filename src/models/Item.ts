@@ -1,4 +1,4 @@
-import { Item as IItem } from '../interfaces'
+import extend from 'extend'
 
 export default class Item {
   icon: string
@@ -11,9 +11,7 @@ export default class Item {
   rep: number
   quantity?: number
   
-  constructor(options: IItem) {
-    for (const option in options) {
-      this[option] = options[option]
-    }
+  constructor(options: Item) {
+    extend(this, options)
   }
 }

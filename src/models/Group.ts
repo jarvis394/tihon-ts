@@ -1,4 +1,4 @@
-import { Group as IGroup } from '../interfaces'
+import extend from 'extend'
 
 export default class Group {
   category: string
@@ -7,10 +7,8 @@ export default class Group {
   title: string
   name: string
   id?: number
-  
-  constructor(options: IGroup) {
-    for (const option in options) {
-      this[option] = options[option]
-    }
+
+  constructor(options: Group) {
+    extend(this, options)
   }
 }

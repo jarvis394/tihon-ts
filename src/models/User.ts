@@ -1,18 +1,23 @@
 import db from '@globals/database'
-import vk from '@globals/vk'
+import { api } from '@globals/vk'
 import Database from 'better-sqlite3'
-import { IUser, IUserModel, IUsersGetModel } from '@interfaces/User'
+import { IUserModel, IUsersGetModel } from '@interfaces/User'
 import { Item as IItem, Pet as IPet } from '@interfaces'
 import getUsersTop from '@utils/getUsersTop'
 import { getGroupByItemId } from '@utils/shop'
 import { USER as defaultData } from '@config/defaultData'
 import { UsersGetParams } from 'vk-io/lib/api/schemas/params'
 
-const { api } = vk
+export default class User {
+  /**
+   * User's ID
+   */
+  readonly id: number
 
-export default class User implements IUser {
-  public id: number
-  public stringId: string
+  /**
+   * User's stringified ID
+   */
+  readonly stringId: string
 
   /**
    * User class
@@ -33,6 +38,10 @@ export default class User implements IUser {
     return this
   }
 
+  /**
+   * Sets data to db
+   * @param {object} data Data to set
+   */
   setData(data: IUserModel): Database.RunResult {
     data.id = this.id
 
@@ -42,6 +51,9 @@ export default class User implements IUser {
     return st.run(data)
   }
 
+  /**
+   * Gets user's hidden status
+   */
   get hidden(): boolean {
     return (
       db.prepare(`SELECT hidden FROM main.users WHERE id = ${this.id};`).get()
@@ -49,6 +61,9 @@ export default class User implements IUser {
     )
   }
 
+  /**
+   * Gets user's items
+   */
   get items(): Record<string, IItem> | null {
     const data = db
       .prepare(`SELECT * from main.items WHERE userId = ${this.id};`)
@@ -61,6 +76,9 @@ export default class User implements IUser {
     return res
   }
 
+  /**
+   * Gets user's pet
+   */
   get pet(): IPet | null {
     const data = db
       .prepare(`SELECT * from main.pets WHERE userId = ${this.id};`)
@@ -69,6 +87,9 @@ export default class User implements IUser {
     return data
   }
 
+  /**
+   * Gets user's earnings
+   */
   get earnings(): Record<string, number> {
     const data = db
       .prepare(`SELECT * from main.earnings WHERE userId = ${this.id};`)
@@ -81,6 +102,9 @@ export default class User implements IUser {
     return res
   }
 
+  /**
+   * Gets user's amount
+   */
   get money(): number {
     const data = db
       .prepare(`SELECT money FROM main.users WHERE id = ${this.id};`)
@@ -88,6 +112,9 @@ export default class User implements IUser {
     return data
   }
 
+  /**
+   * Gets user's reputation
+   */
   get reputation(): number {
     const data = db
       .prepare(`SELECT reputation FROM main.users WHERE id = ${this.id};`)
@@ -95,6 +122,9 @@ export default class User implements IUser {
     return data
   }
 
+  /**
+   * Gets user's amount
+   */
   get guild(): number {
     const data = db
       .prepare(`SELECT guild FROM main.users WHERE id = ${this.id};`)
@@ -102,6 +132,10 @@ export default class User implements IUser {
     return data
   }
 
+  /**
+   * Checks whether user can buy an item
+   * @param {number} price Item's proce
+   */
   isEnoughFor(price: number): { amount: number; state: boolean } {
     const amount = this.money
     const state = amount - price > 0
@@ -112,6 +146,10 @@ export default class User implements IUser {
     }
   }
 
+  /**
+   * Adds amount to the user's balance
+   * @param {number} n Amount to add
+   */
   add(n: number): Database.RunResult {
     return db
       .prepare(
@@ -120,6 +158,10 @@ export default class User implements IUser {
       .run()
   }
 
+  /**
+   * Subtracts amount from the user's balance
+   * @param {numebr} n Amount to subtract
+   */
   subtract(n: number): Database.RunResult | boolean {
     const m = this.money
 
@@ -130,6 +172,10 @@ export default class User implements IUser {
       .run()
   }
 
+  /**
+   * Adds amount to the user's rank
+   * @param {number} n Amount to add
+   */
   addReputation(n: number): Database.RunResult {
     return db
       .prepare(
@@ -140,6 +186,10 @@ export default class User implements IUser {
       .run()
   }
 
+  /**
+   * Removes amount from the user's rank
+   * @param {number} n Amount to subtract
+   */
   subtractReputation(n: number): Database.RunResult | boolean {
     const r = this.reputation
 
@@ -152,6 +202,11 @@ export default class User implements IUser {
       .run()
   }
 
+  /**
+   * Sets earning by field
+   * @param {string} field Field to set
+   * @param {number} time Time to set
+   */
   setEarning(field: string, time: number): Database.RunResult {
     return db
       .prepare(
@@ -166,6 +221,10 @@ export default class User implements IUser {
       })
   }
 
+  /**
+   * Sets item in the user's inventory
+   * @param {number} id Item's ID
+   */
   setItem(id: number): IItem | false {
     const items = this.items
     const group = getGroupByItemId(id)
@@ -194,6 +253,10 @@ export default class User implements IUser {
     return this.items[groupName]
   }
 
+  /**
+   * Removes item from user's inventory
+   * @param {string} group Group
+   */
   removeItem(group: number): IItem | false {
     const item = this.items[group]
 
@@ -217,6 +280,11 @@ export default class User implements IUser {
     return this.items[group] || null
   }
 
+  /**
+   * Set user's pet
+   * @param {number} id Pet's ID
+   * @returns timestamp - Date when the pet has been written in database
+   */
   setPet(id: number): number | false {
     const pet = this.pet
     const timestamp = Date.now()
@@ -238,6 +306,9 @@ export default class User implements IUser {
     return timestamp
   }
 
+  /**
+   * Removes pet from the user
+   */
   removePet(): Database.RunResult | boolean {
     // Return false if no pet was found
     if (!this.pet) return false
@@ -246,12 +317,20 @@ export default class User implements IUser {
     return db.prepare(`DELETE FROM main.pets WHERE userId = ${this.id};`).run()
   }
 
+  /**
+   * Sets user's guild
+   * @param {string} id Guild's ID
+   */
   setGuild(id: string | number): Database.RunResult {
     return db
       .prepare(`UPDATE main.users SET guild = ${id} WHERE id = ${this.id};`)
       .run()
   }
 
+  /**
+   * Returns the payload of the user's name
+   * @param nameCase Name case
+   */
   async getName(
     nameCase: UsersGetParams['name_case'] = 'nom'
   ): Promise<IUsersGetModel> {
@@ -263,6 +342,10 @@ export default class User implements IUser {
     return response[0] || null
   }
 
+  /**
+   * Returns the user's name
+   * @param nameCase Name case
+   */
   async getFullName(
     nameCase: UsersGetParams['name_case'] = 'nom'
   ): Promise<string | null> {
@@ -276,6 +359,9 @@ export default class User implements IUser {
       : null
   }
 
+  /**
+   * Gets user's top position (0 < x <= 100)
+   */
   getTopPlace(): null | number {
     const place = getUsersTop().findIndex((e: { id: any }) => e.id === this.id)
 

@@ -1,4 +1,4 @@
-import { Pet as IPet } from '../interfaces'
+import extend from 'extend'
 
 export default class Pet {
   icon: string
@@ -6,9 +6,7 @@ export default class Pet {
   price: number
   id?: number
   
-  constructor(options: IPet) {
-    for (const option in options) {
-      this[option] = options[option]
-    }
+  constructor(options: Pet) {
+    extend(this, options)
   }
 }
