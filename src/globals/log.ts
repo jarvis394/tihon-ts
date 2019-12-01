@@ -1,7 +1,8 @@
 import { createLogger, format, transports } from 'winston'
+import { COLORS, LEVELS } from '../config/logger'
+import chalk from 'chalk'
 
 const { combine, timestamp, splat, json, errors, simple, printf } = format
-import { COLORS, LEVELS } from '../config/logger'
 
 const ignorePrivate = format(info => {
   if (info.private) return false
@@ -9,7 +10,12 @@ const ignorePrivate = format(info => {
 })
 
 const consoleFormat = printf(info => {
-  let m = `[${COLORS[info.level](`${info.level}`)}]  `
+  const timestamp = new Date(info.timestamp).toLocaleTimeString('en-US', { hour12: false })
+  const level: string = COLORS[info.level](`${info.level.toUpperCase()}`)
+  const alignmentLevel = ' '.repeat(7 - info.level.length)
+  const service = info.service || 'vk'
+  const alignmentService = ' '.repeat(3 - service.length)
+  let m = `${chalk.bold(chalk.gray(timestamp))}  [${service.toUpperCase()}]${alignmentService} ${info.level === 'error' ? chalk.bold(level) : level} ${alignmentLevel}`
 
   if (info.stack) m += info.stack
   else m += info.message

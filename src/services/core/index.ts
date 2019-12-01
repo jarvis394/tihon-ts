@@ -2,6 +2,6 @@ import { vk } from '../../globals/vk'
 import log from '../../globals/log'
 
 vk.updates.startPolling()
-log.info('[VK] Started polling')
+log.info('Started polling', { service: 'vk' })
 
 require('./middleware')

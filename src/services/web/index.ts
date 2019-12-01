@@ -11,4 +11,4 @@ app.use(bodyParser.json())
 // Routes
 import './routes'
 
-app.listen(PORT, () => log.info(`[WEB] Started on port ${PORT}`, { private: true }))
+app.listen(PORT, () => log.info(`Started on port ${PORT}`, { private: true, service: 'web' }))

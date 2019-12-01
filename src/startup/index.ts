@@ -3,4 +3,5 @@
  */
 require('module-alias/register')
 
+console.clear()
 import './env'
