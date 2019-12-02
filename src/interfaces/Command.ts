@@ -1,22 +1,44 @@
+import { MessageContext } from 'vk-io'
+
 interface LanguageList {
-  en: string,
+  en: string
   ru: string
 }
 
 export default interface ICommand {
-  /**
-   * Command information
-   */
   info: {
-    arguments: LanguageList,
-    description: LanguageList,
-    alias: string[],
-    group: string,
+    /**
+     * Command arguments
+     */
+    arguments: LanguageList
+
+    /**
+     * Command descrpition
+     */
+    description: LanguageList
+
+    /**
+     * Command aliases
+     */
+    alias: string[]
+
+    /**
+     * Command group name
+     */
+    group: string
+
+    /**
+     * Command name
+     */
     name: string
   }
-  
+
   /**
    * Async function that runs the command
    */
-  run: (options: Record<any, any>) => Promise<any>
+  run: (options: {
+    update: MessageContext
+    args?: string[]
+    mentionCmdState?: boolean
+  }) => Promise<any>
 }

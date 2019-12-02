@@ -1,8 +1,9 @@
-exports.run = async ({ update, args }) => {
-  const randomMessage = require('../../utils/randomMessage')
+import randomMessage from '@utils/randomMessage'
+import { MessagesHistoryMessageAttachment } from 'vk-io'
 
-  let res
-  let options = {}
+exports.run = async ({ update }) => {
+  let res: string
+  let options: { attachment?: string } = {}
   let flag = false
 
   let msg = await randomMessage()
@@ -10,9 +11,9 @@ exports.run = async ({ update, args }) => {
   if (msg.text !== '') res = msg.text
 
   if (msg.attachments.length !== 0) {
-    msg.attachments.forEach(async attachment => {
+    msg.attachments.forEach(async (attachment: MessagesHistoryMessageAttachment) => {
       if (attachment.type === 'photo') {
-        /*let access = attachment.photo.access_key
+        let access = attachment.photo.access_key
             ? '_' + attachment.photo.access_key
             : ''
           options.attachment += options.attachment
@@ -21,7 +22,7 @@ exports.run = async ({ update, args }) => {
             }${access}`
             : `, photo${attachment.photo.owner_id}_${
               attachment.photo.id
-            }${access}`*/
+            }${access}`
       } else if (attachment.type === 'sticker') {
         flag = true
         return await update.sendSticker(attachment.sticker.sticker_id)
@@ -39,11 +40,7 @@ exports.run = async ({ update, args }) => {
     })
   }
 
-  // let date = await api.utils.getServerTime()
-
   if (!flag) await update.send(res, options)
-
-  // rs.set(date, msg.id)
 }
 
 exports.command = {

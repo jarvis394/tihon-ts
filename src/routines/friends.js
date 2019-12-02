@@ -1,5 +1,6 @@
-const { AUTO_INTERVAL } = require('../configs/constants')
-const { api, log } = require('../globals')
+const { AUTO_INTERVAL } = require('@config/constants')
+const { api } = require('@globals/vk')
+const { log } = require('@globals/log')
 
 setInterval(async () => {
   let list = await api.friends.getRequests({

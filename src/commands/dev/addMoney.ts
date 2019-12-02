@@ -1,6 +1,7 @@
-exports.run = async ({ update, args }) => {
-  const User = require('../../lib/models/User')
-  let user = new User(
+import User from '@models/User'
+
+export const run = async ({ update, args }) => {
+  let user: User = new User(
     args[0] && args[1] ? args[1].split('|')[0].slice(3) : update.senderId
   )
 
@@ -15,6 +16,6 @@ exports.run = async ({ update, args }) => {
   return update.send('✨ Добавлено ' + args[0] + 'T к ' + user.id)
 }
 
-exports.command = {
+export const command = {
   hidden: true,
 }

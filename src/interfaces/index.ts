@@ -1,5 +1,3 @@
 export { default as User } from './User'
-export { default as Item } from './Item'
-export { default as Pet } from './Pet'
 export { default as Command } from './Command'
 export { default as Earning } from './Earning'

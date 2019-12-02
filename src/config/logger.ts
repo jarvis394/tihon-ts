@@ -4,7 +4,7 @@ export const COLORS = {
   debug: chalk.cyan,
   info: chalk.blue,
   warn: chalk.yellow,
-  error: chalk.red,
+  error: chalk.white, // chalk.red,
   success: chalk.green,
   command: chalk.cyan,
 }

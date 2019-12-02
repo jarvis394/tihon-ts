@@ -1,8 +1,9 @@
-const { random } = require('../utils/random')
-const randomMessage = require('../utils/randomMessage')
-const data = require('../utils/data')
-const { AUTO_INTERVAL } = require('../configs/constants')
-const { db, log, collect } = require('../globals')
+const { random } = require('@utils/random')
+const randomMessage = require('@utils/randomMessage')
+const data = require('@utils/data')
+const { AUTO_INTERVAL } = require('@config/constants')
+const { db, log } = require('@globals')
+const { collect } = require('@globals/vk')
 
 let queue = []
 

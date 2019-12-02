@@ -15,10 +15,11 @@ const consoleFormat = printf(info => {
   const alignmentLevel = ' '.repeat(7 - info.level.length)
   const service = info.service || 'vk'
   const alignmentService = ' '.repeat(3 - service.length)
-  let m = `${chalk.bold(chalk.gray(timestamp))}  [${service.toUpperCase()}]${alignmentService} ${info.level === 'error' ? chalk.bold(level) : level} ${alignmentLevel}`
+  const isError = info.level === 'error'
+  let m = `${chalk.bold(isError ? chalk.white(timestamp) : chalk.gray(timestamp))} ${(isError ? chalk.rgb(150, 150, 150) : chalk.rgb(100, 100, 100))(`[${service.toUpperCase()}]`)} ${alignmentService} ${isError ? chalk.bgRedBright.bold(level) : level} ${alignmentLevel}`
 
-  if (info.stack) m += info.stack
-  else m += info.message
+  if (info.stack) m += chalk.rgb(255, 255, 255)(info.stack)
+  else m += isError ? chalk.rgb(255, 255, 255)(info.message) : info.message
 
   return m
 })
