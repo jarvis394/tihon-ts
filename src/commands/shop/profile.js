@@ -80,7 +80,7 @@ exports.run = async ({ update, args }) => {
 exports.command = {
   arguments: false,
   description: {
-    en: "Shows user's profile",
+    en: 'Shows user\'s profile',
     ru: 'Показывает профиль пользователя',
   },
   alias: ['профиль'],

@@ -82,7 +82,7 @@ exports.run = async ({ update, args }) => {
 
   try {
     opponentId = parseInt(args[0].split('|')[0].slice(3))
-    if (isNaN(opponentId)) throw new Error("argument 'opponentId' is NaN")
+    if (isNaN(opponentId)) throw new Error('argument \'opponentId\' is NaN')
     if (update.senderId === opponentId) throw new Error('ids are same')
   } catch (e) {
     return update.reply(
@@ -138,12 +138,12 @@ exports.run = async ({ update, args }) => {
 
   function getCategory(i) {
     switch (i) {
-      case 0:
-        return 'beginning'
-      case 1:
-        return 'middle'
-      default:
-        return 'filling'
+    case 0:
+      return 'beginning'
+    case 1:
+      return 'middle'
+    default:
+      return 'filling'
     }
   }
 

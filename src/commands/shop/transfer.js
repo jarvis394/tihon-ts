@@ -9,7 +9,7 @@ exports.run = async ({ update, args }) => {
   try {
     receiverId = parseInt(args[0].split('|')[0].slice(3))
 
-    if (isNaN(receiverId)) throw new Error("argument 'receiverId' is NaN")
+    if (isNaN(receiverId)) throw new Error('argument \'receiverId\' is NaN')
   } catch (e) {
     return update.reply(
       '✖️ Не упомянут человек, кому нужно перевести тихоины\n\nПример: @tihon_bot передать *id 1000'
@@ -30,7 +30,7 @@ exports.run = async ({ update, args }) => {
   try {
     amount = parseInt(args[1])
 
-    if (isNaN(amount)) throw new Error("argument 'amount' is NaN")
+    if (isNaN(amount)) throw new Error('argument \'amount\' is NaN')
   } catch (e) {
     return update.reply('✖️ Нет суммы\n\nПример: @tihon_bot передать *id 1000')
   }

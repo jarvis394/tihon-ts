@@ -59,7 +59,7 @@ exports.run = async ({ update, args }) => {
     })
 
     let group = getGroupById(groupId)
-    let res = [name[0].first_name + ", раздел '" + group.name + "':", '']
+    let res = [name[0].first_name + ', раздел \'' + group.name + '\':', '']
 
     data.items.forEach((item, i) => {
       if (item.groupId === groupId) {

@@ -1,6 +1,6 @@
-import User from '../../models/User'
-import { CURRENCY } from '../../config/constants'
-import ICommand from 'src/interfaces/Command'
+import User from '@models/User'
+import { CURRENCY } from '@config/constants'
+import ICommand from '@interfaces/Command'
 
 exports.run = async ({ update, args }) => {
   const user = new User(update.senderId)

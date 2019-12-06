@@ -10,7 +10,7 @@ router.get('/:id', (req, res) => {
     res.status(402)
     return res.json({
       code: 402,
-      error: "'id' field should be a Number",
+      error: '\'id\' field should be a Number',
     })
   }
 
