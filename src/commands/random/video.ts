@@ -1,7 +1,8 @@
-exports.run = async ({ update, args }) => {
-  const { randomArray } = require('../../utils/random')
-  const { api, db } = require('../../globals')
+import { randomArray } from '@utils/random'
+import { api } from '@globals/vk'
+import db from '@globals/database'
 
+exports.run = async ({ update, args }) => {
   async function getMsg() {
     var Dialog = randomArray(Dialogs.items)
 

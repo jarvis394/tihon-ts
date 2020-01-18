@@ -1,6 +1,6 @@
 import { MessageContext } from 'vk-io'
-import { COMMAND_COOLDOWN } from '../../../config/constants'
-import { talkedRecently } from '../../../globals/storages'
+import { COMMAND_COOLDOWN } from '@config/constants'
+import { talkedRecently } from '@globals/storages'
 
 export default async (update: MessageContext, next: Function) => {
   const { senderId, state } = update

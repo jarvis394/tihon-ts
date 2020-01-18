@@ -19,7 +19,7 @@ export default () => {
     fs.writeFile(dialogsFilePath, JSON.stringify(data), err => {
       if (err) return log.error('On trying to write dialogs list: ' + err)
 
-      log.info(`Got ${data.total} dialogs`, { private: true })
+      log.debug(`Got ${data.total} dialogs`, { private: true })
 
       return events.emit('getDialogsSuccess')
     })

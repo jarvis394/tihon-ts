@@ -1,19 +1,25 @@
 import fs from 'fs'
+import log from './log'
 import path from 'path'
 const COMMANDS_PATH: string = path.join(__dirname, '..', 'commands')
 
 let commands = []
-fs.readdirSync(COMMANDS_PATH).forEach(group => {
-  fs.readdirSync(COMMANDS_PATH + '/' + group).forEach(command => {
-    let i = require('../commands/' + group + '/' + command).command
+fs.readdirSync(COMMANDS_PATH).forEach(groupName => {
+  fs.readdirSync(COMMANDS_PATH + '/' + groupName).forEach(commandName => {
+    try {
+      const command = require('../commands/' + groupName + '/' + commandName).command
+      if (command.hidden) return false
 
-    if (i.hidden) return
-
-    i.group = group
-    i.name = command.split('.')[0]
-
-    commands.push(i)
+      command.group = groupName
+      command.name = commandName.split('.')[0]
+      commands.push(command)
+    } catch (e) {
+      log.error('On parsing commands: ' + e)
+      console.error(e)
+    }
   })
 })
+
+log.debug('Loaded ' + commands.length + ' commands')
 
 export default commands

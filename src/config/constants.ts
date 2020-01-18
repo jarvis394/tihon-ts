@@ -22,7 +22,7 @@ export const CURRENCY: string = '₮'
  * Cooldown between commands
  * (3 seconds)
  */
-export const COMMAND_COOLDOWN: number = 3000
+export const COMMAND_COOLDOWN: number = 1000
 
 /**
  * Cooldown between /anon commands
@@ -35,6 +35,11 @@ export const ANON_COOLDOWN: number = 1000 * 60 * 2
  * (2 minutes)
  */
 export const BATTLE_COOLDOWN: number = 1000 * 60 * 2
+
+/**
+ * Battle starting price
+ */
+export const BATTLE_PRICE = 2500
 
 /**
  * Interval between auto-sending random messages

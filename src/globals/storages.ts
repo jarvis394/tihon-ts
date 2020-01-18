@@ -4,4 +4,4 @@ export const memoryStorage: Map<number, any> = new Map()
 
 export const talkedRecently: Set<number> = new Set()
 
-export const timeouts: Map<number, any> = new Map()
+export const timeouts: Map<any, any> = new Map()

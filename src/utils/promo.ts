@@ -1,10 +1,11 @@
 import { random } from './random'
+import IUser from '@models/User'
 import fs from 'fs'
 import path from 'path'
 import promos from '@config/data/promo'
 import log from '@globals/log'
 
-export const promoFunction = (f: (u: any) => void, u: any) => f(u)
+export const promoFunction = (f: (u: IUser) => any, u: IUser): any => f(u)
 
 /**
  * Generates promo

@@ -1,6 +1,6 @@
 import { MessageContext } from 'vk-io'
-import { ADMINS_ONLY, EXCLUDE_ADMINS } from '../../../config/admins'
-import isAdmin from '../../../utils/isAdmin'
+import { ADMINS_ONLY, EXCLUDE_ADMINS } from '@config/admins'
+import isAdmin from '@utils/isAdmin'
 
 export default async (
   update: MessageContext,

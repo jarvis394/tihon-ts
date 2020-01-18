@@ -1,6 +1,8 @@
 import User from '@models/User'
 import { CURRENCY } from '@config/constants'
 import ICommand from '@interfaces/Command'
+import { command as list } from './list'
+import { command as who } from './who'
 
 exports.run = async ({ update, args }) => {
   const user = new User(update.senderId)
@@ -11,9 +13,7 @@ exports.run = async ({ update, args }) => {
     )
 
   let commandName: string = args[0]
-  const list: ICommand['info'] = require('./list').command
-  const who: ICommand['info'] = require('./who').command
-
+  
   // Return if no arguments
   if (!commandName) {
     throw new Error('Введи команду')

@@ -1,11 +1,11 @@
-exports.run = async ({ update, args }) => {
-  const { commands } = require('../../globals')
+import commands from '@globals/commands'
 
+exports.run = async ({ update, args }) => {
   const cmdName = args[0]
   let command
 
   if (!cmdName) {
-    throw new Error('Введи команду')
+    return update.reply('🔻 Введи команду')
   }
 
   commands.forEach(c => {
@@ -18,14 +18,14 @@ exports.run = async ({ update, args }) => {
   })
 
   if (!command) {
-    throw new Error('Команда не найдена')
+    return update.reply('🔻 Команда не найдена')
   }
 
   const { group, name } = command
 
   delete require.cache[require.resolve(`../../commands/${group}/${name}`)]
 
-  return '👌'
+  return update.reply('👌')
 }
 
 exports.command = {

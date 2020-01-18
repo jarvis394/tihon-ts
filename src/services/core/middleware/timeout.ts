@@ -1,5 +1,5 @@
 import { MessageContext } from 'vk-io'
-import { timeouts } from '../../../globals/storages'
+import { timeouts } from '@globals/storages'
 import moment from 'moment'
 
 moment.locale('ru')
@@ -14,7 +14,8 @@ export default async (
   update: MessageContext,
   next: Function
 ): Promise<void | number> => {
-  if (!update.state.isCommand) return
+  if (update.state.isMentionMessage) return await next()
+  else if (!update.state.isCommand) return 
 
   const { senderId, state } = update
   const { command } = state

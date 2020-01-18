@@ -1,7 +1,7 @@
-exports.run = async ({ update, args }) => {
-  const { random } = require('../../utils/random')
-  const { api } = require('../../globals')
+import { random } from '@utils/random'
+import { api } from '@globals/vk'
 
+exports.run = async ({ update, args }) => {
   if (random(0, 6) === 6) {
     api.messages
       .removeChatUser({

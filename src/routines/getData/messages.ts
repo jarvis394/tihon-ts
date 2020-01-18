@@ -5,7 +5,7 @@ import log from '@globals/log'
 import { collect } from '@globals/vk'
 import createFileIfNotExists from '@utils/createFileIfNotExists'
 import { getDialogs } from '@utils/data'
-import { MessagesConversation } from 'vk-io'
+import { MessagesGetConversationsResponse } from 'vk-io'
 
 export default () => {
   const dialogsFilePath = path.resolve('temp/dialogs.json')
@@ -19,7 +19,7 @@ export default () => {
   const data = getDialogs()
   const amount = data.length > 50 ? 50 : data.length
 
-  const executeItems = data.slice(0, amount).map((el: MessagesConversation) => ({
+  const executeItems = data.slice(0, amount).map((el: MessagesGetConversationsResponse) => ({
     peer_id: el.conversation.peer.id,
     count: 100,
     offset: 0,
@@ -33,7 +33,7 @@ export default () => {
     fs.writeFile(messagesFilePath, JSON.stringify(data), err => {
       if (err) return log.error('On trying to write messages list: ' + err)
 
-      log.info('Got messages history for ' + amount + ' dialogs', {
+      log.debug('Got messages history for ' + amount + ' dialogs', {
         private: true,
       })
       return events.emit('getMessagesSuccess')

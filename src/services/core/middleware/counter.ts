@@ -1,6 +1,6 @@
-import handleError from '../../../utils/handleError'
-import { sessionStorage } from '../../../globals/storages'
-import ICommand from '../../../interfaces/Command'
+import handleError from '@utils/handleError'
+import { sessionStorage } from '@globals/storages'
+import ICommand from '@interfaces/Command'
 import { MessageContext } from 'vk-io'
 
 export default async (

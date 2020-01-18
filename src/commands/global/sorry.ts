@@ -1,6 +1,6 @@
-exports.run = async ({ update, args }) => {
-  const { randomArray } = require('../../utils/random')
+import { randomArray } from '@utils/random'
 
+exports.run = async ({ update, args }) => {
   const sorry = [
     'Мне искренне жаль, если я что-то не так сказал... У меня ошибочка, знаете.',
     'Если я что-то не то сказал, реально s o r r y.',

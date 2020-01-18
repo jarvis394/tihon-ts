@@ -67,7 +67,7 @@ export const messageService = async (dialog: MessagesGetConversationsResponse) =
 }
 
 setInterval(async () => {
-  log.info('Started sending random messages')
+  log.debug('Started sending random messages')
 
   queue = []
 

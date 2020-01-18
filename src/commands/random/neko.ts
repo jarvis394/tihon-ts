@@ -1,6 +1,6 @@
-exports.run = async ({ update, args }) => {
-  const { get } = require('request-promise-native')
+import { get } from 'request-promise-native'
 
+exports.run = async ({ update, args }) => {
   const options = {
     url: 'https://nekos.life/api/neko',
     json: true,

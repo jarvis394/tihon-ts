@@ -13,6 +13,6 @@ setInterval(() => run(), DATA_GET_INTERVAL)
 run()
 
 function run() {
-  log.info('Started getting messages and dialogs data')
+  log.debug('Started getting messages and dialogs data')
   dialogs()
 }

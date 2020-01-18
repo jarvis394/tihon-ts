@@ -2,12 +2,12 @@ import db from '@globals/database'
 import { api } from '@globals/vk'
 import Database from 'better-sqlite3'
 import { IUserModel, IUsersGetModel } from '@interfaces/User'
-import IPet from '@models/Pet'
 import IItem from '@models/Item'
 import getUsersTop from '@utils/getUsersTop'
 import { getGroupByItemId } from '@utils/shop'
 import { USER as defaultData } from '@config/defaultData'
 import { UsersGetParams } from 'vk-io/lib/api/schemas/params'
+import { IPet } from '@interfaces/db'
 
 export default class User {
   /**
@@ -258,7 +258,7 @@ export default class User {
    * Removes item from user's inventory
    * @param {string} group Group
    */
-  removeItem(group: number): IItem | false {
+  removeItem(group: string): IItem | false {
     const item = this.items[group]
 
     // Check item

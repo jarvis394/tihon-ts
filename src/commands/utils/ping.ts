@@ -1,3 +1,5 @@
+import { randomArray } from '@utils/random'
+
 export const run = async ({ update }) => {
   const replies = [
     'Шо ты меня пингуешь братец',
@@ -6,8 +8,7 @@ export const run = async ({ update }) => {
     'Чавой?',
     'Пинг-понг',
   ]
-  const { randomArray } = require('../../utils/random')
-
+  
   return update.reply(randomArray(replies))
 }
 

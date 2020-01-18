@@ -1,4 +1,4 @@
-import { USERS, DIALOGS } from '../../../config/blacklist'
+import { USERS, DIALOGS } from '@config/blacklist'
 import { MessageContext } from 'vk-io'
 
 export default async (

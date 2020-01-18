@@ -1,8 +1,9 @@
-exports.run = async ({ update }) => {
-  const { randomArray } = require('../../utils/random')
-  const { api, db } = require('../../globals')
-  const blacklist = require('../../configs/blacklist')
+import { randomArray } from '@utils/random'
+import { api } from '@globals/vk'
+import db from '@globals/database'
+import * as blacklist from '@config/blacklist'
 
+exports.run = async ({ update }) => {
   // Get dialogs
   var Dialogs = await api.messages.getConversations({
     count: 200,

@@ -1,5 +1,5 @@
-import { randomArray } from '../../utils/random'
-import { api } from '../../globals/vk'
+import { randomArray } from '@utils/random'
+import { api } from '@globals/vk'
 import { UsersFields, UsersUserFull } from 'vk-io'
 
 export const run = async ({ update, args, mentionCmdState }) => {

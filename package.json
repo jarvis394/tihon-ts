@@ -1,33 +1,35 @@
 {
   "name": "tihon",
-  "version": "9.2.0",
+  "version": "9.3.0",
   "description": "Development side of strange villager that tells you something random 🤔",
   "main": "dist/src/index.js",
   "scripts": {
     "start": "npm run start:dev",
-    "start:dev": "ts-node-dev --respawn --clear src/index.ts",
+    "start:dev": "ts-node src/index.ts",
     "start:prod": "node .",
     "build": "tsc -b",
+    "postbuild": "cp .env dist/",
     "test": "jest",
     "lint": "npm run lint:eslint && npm run lint:prettier",
     "lint:eslint": "eslint . --fix",
     "lint:prettier": "prettier src/**/{.[^.],}* --config .prettierrc --write"
   },
   "dependencies": {
-    "@hapi/joi": "^16.1.7",
+    "@hapi/joi": "^17.0.1",
     "better-sqlite3": "^5.4.3",
     "body-parser": "^1.19.0",
-    "chalk": "^2.4.2",
+    "chalk": "^3.0.0",
     "dotenv": "^8.2.0",
     "extend": "^3.0.2",
     "hashids": "^2.1.0",
     "is-url": "^1.2.4",
-    "mathjs": "^6.2.5",
+    "mathjs": "^6.5.0",
     "module-alias": "^2.2.2",
     "moment": "^2.24.0",
     "reverse-line-reader": "^0.2.6",
     "vk-io": "^4.0.0-rc.20",
-    "winston": "^3.2.1"
+    "winston": "^3.2.1",
+    "morgan": "^1.9.1"
   },
   "engines": {
     "node": "12.x"
@@ -57,15 +59,8 @@
     "prettier": "^1.18.2",
     "ts-jest": "^24.1.0",
     "ts-node-dev": "^1.0.0-pre.44",
-    "typescript": "^3.6.4"
-  },
-  "_moduleAliases": {
-    "@config": "./src/config",
-    "@globals": "./src/globals",
-    "@models": "./src/models",
-    "@interfaces": "./src/interfaces",
-    "@structures": "./src/structures",
-    "@utils": "./src/utils",
-    "@commands": "./src/commands"
+    "typescript": "^3.6.4",
+    "globby": "^11.0.0",
+    "@types/globby": "^8.0.0"
   }
 }

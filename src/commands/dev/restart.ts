@@ -1,6 +1,6 @@
 exports.run = async ({ update, args }) => {
+  update.reply('👌')
   process.kill(process.pid)
-  return '👌'
 }
 
 exports.command = {

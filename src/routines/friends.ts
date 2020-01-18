@@ -10,6 +10,6 @@ setInterval(async () => {
   // Run through the list of pending friends and add each of them
   list.items.forEach(async id => {
     await api.friends.add({ user_id: id }).catch(e => log.error(e))
-    log.info('Added ' + id + ' as a friend', { private: true })
+    log.debug('Added ' + id + ' as a friend', { private: true })
   })
 }, AUTO_INTERVAL)

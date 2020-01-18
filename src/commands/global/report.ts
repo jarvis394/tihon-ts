@@ -1,20 +1,21 @@
-exports.run = async ({ update, args }) => {
-  const { log } = require('../../globals')
-  const ID = 555444315
-  const msg = update.payload.fwd_messages
+import log from '@globals/log'
 
-  if (!msg) {
+exports.run = async ({ update, args }) => {
+  const ID = 555444315
+  const messages = update.payload.message.fwd_messages
+
+  if (!messages[0]) {
     return await update.reply(
-      '😯 Перешли мне сообщения, которые считаешь багнутыми, чтобы отправить их разработчикам.'
+      '😯 Перешли мне сообщения (через значок →), которые считаешь багнутыми, чтобы отправить их разработчикам.'
     )
   }
 
   try {
     await update.send(
-      `🔻 Репорт от ${update.senderId}, чат ${update.chatId}:`,
+      `🛠️ Репорт от *id${update.senderId}, чат ${update.chatId}:`,
       {
         peer_id: ID,
-        forward_messages: msg.map(e => e.id).join(),
+        forward_messages: messages.map(e => e.id).join(),
       }
     )
   } catch (e) {

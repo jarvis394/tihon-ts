@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (_, res) => res.redirect('https://dedtihon.cf/'))
+router.get('/', (_, res) => res.send(process.uptime().toString()))
 
 module.exports = router

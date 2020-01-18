@@ -6,32 +6,30 @@ interface LanguageList {
 }
 
 export default interface ICommand {
-  info: {
-    /**
-     * Command arguments
-     */
-    arguments: LanguageList
+  /**
+   * Command arguments
+   */
+  arguments: LanguageList
 
-    /**
-     * Command descrpition
-     */
-    description: LanguageList
+  /**
+   * Command descrpition
+   */
+  description: LanguageList
 
-    /**
-     * Command aliases
-     */
-    alias: string[]
+  /**
+   * Command aliases
+   */
+  alias: string[]
 
-    /**
-     * Command group name
-     */
-    group: string
+  /**
+   * Command group name
+   */
+  group: string
 
-    /**
-     * Command name
-     */
-    name: string
-  }
+  /**
+   * Command name
+   */
+  name: string
 
   /**
    * Async function that runs the command

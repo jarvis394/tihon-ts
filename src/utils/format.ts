@@ -1,1 +1,1 @@
-module.exports = (number: number) => new Intl.NumberFormat('en-IN').format(number)
+export default (number: number) => new Intl.NumberFormat('en-IN').format(number)
