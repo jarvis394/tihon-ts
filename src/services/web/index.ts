@@ -5,6 +5,9 @@ import { PORT } from '@config/keys'
 import log from '@globals/log'
 import app from '@globals/express'
 import chalk from 'chalk'
+import fs from 'fs'
+import https from 'https'
+import path from 'path'
 
 // Middlewares
 app.use(express.static('logs'))
@@ -25,4 +28,10 @@ app.use(morgan((tokens, req, res) => {
 // Routes
 import './routes'
 
-app.listen(PORT, () => log.info(`Started on port ${PORT}`, { private: true, service: 'web' }))
+const httpsOptions = {
+  key: fs.readFileSync(path.resolve('src/services/web/key.pem')),
+  cert: fs.readFileSync(path.resolve('src/services/web/cert.pem'))
+}
+https.createServer(httpsOptions, app).listen(PORT)
+log.info(`Started on port ${PORT}`, { private: true, service: 'web' })
+

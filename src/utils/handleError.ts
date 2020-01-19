@@ -11,6 +11,7 @@ export default (update: MessageContext, e: Error) => {
     message: `Command /${update.state.commandName} failed: ${e.message}`,
     stack: e.stack
   })
+  console.log(update)
 
   return update.reply('🔻 ' + e.message + '\n\n🛠️ Это внутренний затык дедка, пожалуйста, оповестите разработчика об этой проблеме:\n/репорт [пересланное сообщение]')
 }

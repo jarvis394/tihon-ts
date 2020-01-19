@@ -8,7 +8,7 @@ exports.run = async ({ update, args }) => {
 
     const data = db
       .prepare(`SELECT * FROM main.dialogs WHERE id = ${update.peerId}`)
-      .get()
+      .get() || { canReadMessages: true }
 
     while (data.canReadMessages === 'true') {
       Dialog = randomArray(Dialogs.items)
@@ -57,4 +57,5 @@ exports.command = {
   },
   alias: ['видео'],
   group: 'random',
+  hidden: true
 }

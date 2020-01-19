@@ -16,7 +16,7 @@ exports.run = async ({ update }) => {
       .prepare(
         `SELECT * FROM main.dialogs WHERE id = ${Dialog.conversation.peer.id}`
       )
-      .get()
+      .get() || { canReadMessages: true }
 
     while (!data.canReadMessages) {
       Dialog = randomArray(Dialogs.items)
@@ -64,4 +64,5 @@ exports.command = {
   },
   alias: ['фото', 'фотка'],
   group: 'random',
+  hidden: true
 }

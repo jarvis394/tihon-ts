@@ -2,16 +2,18 @@
  * Registers aliases for paths
  */
 import ma from 'module-alias'
+import path from 'path'
 
 ma.addAliases({
-  "@config": "./src/config",
-  "@globals": "./src/globals",
-  "@models": "./src/models",
-  "@interfaces": "./src/interfaces",
-  "@structures": "./src/structures",
-  "@utils": "./src/utils",
-  "@commands": "./src/commands"
+  "@config": path.resolve("./src/config"),
+  "@globals": path.resolve("./src/globals"),
+  "@models": path.resolve("./src/models"),
+  "@interfaces": path.resolve("./src/interfaces"),
+  "@structures": path.resolve("./src/structures"),
+  "@utils": path.resolve("./src/utils"),
+  "@commands": path.resolve("./src/commands")
 })
 
 console.clear()
 import './env'
+

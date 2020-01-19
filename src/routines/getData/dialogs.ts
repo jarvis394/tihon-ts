@@ -15,7 +15,7 @@ export default () => {
     return events.emit('getDialogsSuccess')*/
 
   // @ts-ignore
-  stream.on('data', data => {
+  stream.on('data', (data) => {
     fs.writeFile(dialogsFilePath, JSON.stringify(data), err => {
       if (err) return log.error('On trying to write dialogs list: ' + err)
 

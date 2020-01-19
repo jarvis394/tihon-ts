@@ -1,6 +1,6 @@
 const express = require('express')
-const getUsersTop = require('../../../../utils/getUsersTop')
-const User = require('../../../../models/User')
+const getUsersTop = require('../../../../utils/getUsersTop').default
+const User = require('../../../../models/User').default
 const router = express.Router()
 
 router.get('/:id', (req, res) => {
