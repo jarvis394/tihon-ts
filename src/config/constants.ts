@@ -4,6 +4,11 @@
 export const ID: number = Number(process.env.ID)
 
 /**
+ * Bot's group ID
+ */
+export const GROUP_ID: number = Number(process.env.GROUP_ID)
+
+/**
  * Bot prefix
  */
 export const PREFIX: string = '/'
@@ -57,3 +62,8 @@ export const DATA_GET_INTERVAL: number = 3600 * 3 * 1000
  * Daily bonus for user
  */
 export const DAILY_BONUS: number = 5000
+
+/**
+ * Interval between updating statistics table in the bot's group
+ */
+export const GROUP_STATS_UPD_INTERVAL = 3600 * 6 * 1000

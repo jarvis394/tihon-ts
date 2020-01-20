@@ -1,9 +1,9 @@
 import db from '@globals/database'
 
 exports.run = async ({ update, args }) => {
-  let state = db
+  let state = (db
     .prepare('SELECT autoMailing FROM main.dialogs WHERE id =' + update.peerId)
-    .get().autoMailing
+    .get() || { autoMailing: true }).autoMailing
 
   if (state) {
     state = false

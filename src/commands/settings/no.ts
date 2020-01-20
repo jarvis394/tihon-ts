@@ -1,9 +1,9 @@
 import db from '@globals/database'
 
 exports.run = async ({ update, args }) => {
-  let state = db
-    .prepare('SELECT state FROM main.dialogs WHERE id =' + update.peerId)
-    .get().state
+  let state = (db
+    .prepare('SELECT canReadMessages FROM main.dialogs WHERE id =' + update.peerId)
+    .get() || { canReadMessages: true }).canReadMessages
 
   if (state) {
     state = false

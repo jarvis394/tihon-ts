@@ -3,12 +3,12 @@ import db from '@globals/database'
 exports.run = async ({ update, args }) => {
   const data = db
     .prepare('SELECT * FROM main.dialogs WHERE id =' + update.peerId)
-    .get()
+    .get() || { autoMailing: true, canReadMessages: true }
 
   let res =
     '⚙️ Настройки\n' +
-    `⠀⠀Авто отправка сообщений: ${data.autoMailing ? 'Да' : 'Нет'}\n` +
-    `  Брать сообщения из этого диалога: ${data.canReadMessages ? 'Да' : 'Нет'}`
+    `   Авто отправка сообщений: ${data.autoMailing ? 'Да ☑️' : 'Нет ✖️'}\n` +
+    `   Брать сообщения из этого диалога: ${data.canReadMessages ? 'Да ☑️' : 'Нет ✖️'}`
 
   return await update.reply(res)
 }

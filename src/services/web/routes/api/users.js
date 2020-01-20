@@ -1,8 +1,9 @@
 const express = require('express')
-const getUsersTop = require('../../../../utils/getUsersTop').default
-const User = require('../../../../models/User').default
+const getUsersTop = require('@utils/getUsersTop').default
+const User = require('@models/User').default
 const router = express.Router()
 
+router.get('/statistics', (_, res) => res.json(getUsersTop()))
 router.get('/:id', (req, res) => {
   const { id } = req.params
 
@@ -26,7 +27,5 @@ router.get('/:id', (req, res) => {
     id: user.id,
   })
 })
-
-router.get('/statistics', (_, res) => res.json(getUsersTop()))
 
 module.exports = router
