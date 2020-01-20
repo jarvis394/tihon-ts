@@ -45,7 +45,7 @@ export default async (): Promise<IMessageContextPayload['message']> => {
   const canRead = (m: IMessageContextPayload['message']) => {
     const data = db
       .prepare(`SELECT * FROM main.dialogs WHERE id = ${m.peer_id}`)
-      .get()
+      .get() || {}
 
     if (data) {
       return data.canReadMessages === 'true'

@@ -1,4 +1,4 @@
-const { db } = require('../../../globals/database')
+const db = require('@globals/database').default
 const express = require('express')
 const router = express.Router()
 

@@ -68,3 +68,6 @@ temp/
 
 # Exclude dist/ folder
 dist/
+
+.glitch*
+*.pem

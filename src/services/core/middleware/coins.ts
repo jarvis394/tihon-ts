@@ -7,7 +7,7 @@ export default async (
 ): Promise<void> => {
   const { senderId } = update
 
-  if (update.isInbox && senderId > 0) {
+  if (update.isInbox && senderId > 0 && update.type === 'message') {
     const user: User = new User(senderId)
 
     user.add(1)

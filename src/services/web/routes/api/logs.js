@@ -27,6 +27,10 @@ const getLogs = ({ filename, count = 200, offset = 0 }) =>
 router.get('/:filename', async (req, res) => {
   const { count, offset } = req.query
   const { filename } = req.params
+  
+  if (!['main', 'errors', 'commands', 'web'].some(e => e === filename)) {
+    return res.sendStatus(403)
+  }
 
   return await res.json(
     getLogs({

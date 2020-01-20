@@ -15,7 +15,7 @@
     "lint:prettier": "prettier src/**/{.[^.],}* --config .prettierrc --write"
   },
   "dependencies": {
-    "@hapi/joi": "^17.0.1",
+    "@hapi/joi": "^17.0.2",
     "better-sqlite3": "^5.4.3",
     "body-parser": "^1.19.0",
     "chalk": "^3.0.0",

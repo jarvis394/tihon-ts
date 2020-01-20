@@ -6,9 +6,10 @@ export default async (
   update: MessageContext,
   next: Function
 ): Promise<void> => {
-  const { text, isOutbox, senderId } = update
+  const { text, isOutbox, senderId, type } = update
 
   if (isOutbox) return
+  if (type !== 'message') return
   if (text === '' || !text) return
   if (senderId < 0) return
   if (ADMINS_ONLY && !isAdmin(senderId)) return

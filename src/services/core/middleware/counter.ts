@@ -9,7 +9,7 @@ export default async (
 ): Promise<void> => {
   let count: number = 0
 
-  if (update.isInbox) {
+  if (update.isInbox && update.type === 'message') {
     if (sessionStorage.has(update.peerId)) {
       count = sessionStorage.get(update.peerId).counter || 0
     }
