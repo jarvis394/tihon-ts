@@ -2,6 +2,7 @@ import { random } from'@utils/random'
 import randomMessage from '@utils/randomMessage'
 import * as dataUtils from '@utils/data'
 import { AUTO_INTERVAL } from '@config/constants'
+import { DIALOG } from '@config/defaultData'
 import db from '@globals/database'
 import log from '@globals/log'
 import { collect } from '@globals/vk'
@@ -20,7 +21,7 @@ export const messageService = async (dialog: MessagesGetConversationsResponse) =
     .prepare(
       `SELECT * FROM main.dialogs WHERE id = ${dialog.conversation.peer.id}`
     )
-    .get()
+    .get() || DIALOG
   let options: Record<any, any> /*Partial<IMessageContextPayload['message']>*/ = {
     peer_id: dialog.conversation.peer.id,
     random_id: random(10000000, 99999999),

@@ -1,9 +1,10 @@
 import db from '@globals/database'
+import { DIALOG } from '@config/defaultData'
 
 exports.run = async ({ update, args }) => {
   const data = db
     .prepare('SELECT * FROM main.dialogs WHERE id =' + update.peerId)
-    .get() || { autoMailing: true, canReadMessages: true }
+    .get() || DIALOG
 
   let res =
     '⚙️ Настройки\n' +

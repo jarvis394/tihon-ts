@@ -112,8 +112,8 @@ db.prepare(
   `
   CREATE TABLE IF NOT EXISTS "dialogs" (
     "id"	            INTEGER NOT NULL,
-    "autoMailing"     TEXT NOT NULL DEFAULT 'true',
-    "canReadMessages" TEXT NOT NULL DEFAULT 'true',
+    "autoMailing"     INTEGER NOT NULL DEFAULT 1,
+    "canReadMessages" INTEGER NOT NULL DEFAULT 1,
     PRIMARY KEY("id")
   )
 `

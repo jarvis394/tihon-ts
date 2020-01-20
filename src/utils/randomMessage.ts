@@ -7,6 +7,7 @@ import * as dataUtils from './data'
 import db from '@globals/database'
 import { Attachment } from 'vk-io'
 import { IMessageContextPayload } from 'vk-io/lib/structures/contexts/message'
+import { DIALOG } from '@config/defaultData'
 
 /**
  * Returns random message from multidialogs
@@ -34,7 +35,7 @@ export default async (): Promise<IMessageContextPayload['message']> => {
     let flag = false
 
     m.attachments.forEach((a: Attachment) => {
-      if (blacklist.USERS.some((e: number) => e === a[a.type].owner_id.toString())) {
+      if (blacklist.USERS.some((e: number) => a[a.type].owner_id && (e === a[a.type].owner_id.toString()))) {
         flag = true
       }
     })
@@ -45,10 +46,10 @@ export default async (): Promise<IMessageContextPayload['message']> => {
   const canRead = (m: IMessageContextPayload['message']) => {
     const data = db
       .prepare(`SELECT * FROM main.dialogs WHERE id = ${m.peer_id}`)
-      .get() || {}
+      .get() || DIALOG
 
     if (data) {
-      return data.canReadMessages === 'true'
+      return data.canReadMessages
     } else {
       return true
     }
@@ -65,7 +66,7 @@ export default async (): Promise<IMessageContextPayload['message']> => {
   let msg = getMsg()
   let i: number = 0
 
-  while ((testMessage(msg) || testAttachments(msg) /*|| !canRead(msg)*/) && i < 10) {
+  while ((testMessage(msg) || testAttachments(msg) || !canRead(msg)) && i < 10) {
     msg = getMsg()
     i++
   }

@@ -15,7 +15,8 @@ export default () => {
 
   /*if (process.env.MODE === 'DEVELOPMENT')
     return events.emit('getDialogsSuccess')*/
-
+  
+  // @ts-ignore
   stream.on('error', (e) => log.error('On trying to get dialogs:\n' + e))
   
   // @ts-ignore

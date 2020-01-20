@@ -6,6 +6,8 @@ import { ID, BATTLE_COOLDOWN, BATTLE_PRICE } from '@config/constants'
 import { api } from '@globals/vk'
 import { timeouts } from '@globals/storages'
 
+type IHistoryCategories = 'beginning' | 'middle' | 'ending' | 'filling'
+
 /* eslint-disable require-atomic-updates */
 exports.run = async ({ update, args }) => {
   const histories = {
@@ -82,7 +84,7 @@ exports.run = async ({ update, args }) => {
     }
   }
 
-  let opponentId
+  let opponentId: number
   const { senderId } = update
   try {
     opponentId = parseInt(args[0].split('|')[0].slice(3))
@@ -94,10 +96,10 @@ exports.run = async ({ update, args }) => {
     )
   }
   
-  const chatUsers = await api.execute({
+  const chatUsers = (await api.execute({
     code: `
       var members = API.messages.getConversationMembers({
-        "peer_id": update.peerId,
+        "peer_id": ${update.peerId},
         "fields": "first_name,last_name"
       });
       return { 
@@ -106,7 +108,7 @@ exports.run = async ({ update, args }) => {
         "acc": API.users.get({ "user_ids": "${senderId + ',' + opponentId}", "name_case": "acc" })
       };
     `
-  })
+  })).response
 
   if (!chatUsers.profiles.some(e => e.id === opponentId)) return update.reply('🤷‍♂️ Я не вижу этого [id' + opponentId + '|человека] в беседе')
   if (opponentId < 0) return update.reply('👿 Нельзя драться с ботом!')
@@ -115,7 +117,7 @@ exports.run = async ({ update, args }) => {
   const player = new Opponent(senderId)
   const opponent = new Opponent(opponentId)
 
-  const { state, amount } = await player.isEnoughFor(BATTLE_PRICE)
+  const { state, amount } = player.isEnoughFor(BATTLE_PRICE)
   if (!state)
     return update.reply(
       `🧮 Не хватает денег: у тебя ${amount}T, а нужно ${BATTLE_PRICE}T`
@@ -152,7 +154,7 @@ exports.run = async ({ update, args }) => {
 
   let history = [player.name.nom + ' ⚔️ ' + opponent.name.nom, '']
 
-  function getCategory(i) {
+  function getCategory(i: number) {
     switch (i) {
     case 0:
       return 'beginning'
@@ -163,7 +165,7 @@ exports.run = async ({ update, args }) => {
     }
   }
 
-  function getHistory(attacker, c) {
+  function getHistory(attacker: Opponent, c: IHistoryCategories) {
     const text = randomArray(histories[c])
 
     return text
@@ -194,7 +196,7 @@ exports.run = async ({ update, args }) => {
     return update.send(history.join('\n'))
   }
 
-  function next(i) {
+  function next(i: number) {
     if (!player.isDead() && !opponent.isDead()) {
       const damage = random(30, 50),
         attacker = Math.random() >= 0.5 ? player : opponent,
