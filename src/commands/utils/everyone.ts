@@ -7,7 +7,7 @@ export const run = async ({ update, args }) => {
 
   // If user is not in VK dialog admins list then return an error
   if (!members.items.find(e => e.member_id === update.senderId).is_admin) {
-    throw new Error('🤗 Такое доступно только админам!')
+    return update.reply('🤗 Такое доступно только админам!')
   }
 
   const text =
@@ -15,7 +15,7 @@ export const run = async ({ update, args }) => {
     '\n\n' +
     args.join(' ')
 
-  return text
+  return update.reply(text)
 }
 
 export const command = {

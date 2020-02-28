@@ -1,6 +1,6 @@
 import * as express from 'express'
 import bodyParser from 'body-parser'
-import morgan from 'morgan'
+// import morgan from 'morgan'
 import { PORT, MODE } from '@config/keys'
 import log from '@globals/log'
 import app from '@globals/express'
@@ -12,7 +12,7 @@ import path from 'path'
 // Middlewares
 app.use(express.static('logs'))
 app.use(bodyParser.json())
-app.use(morgan((tokens, req, res) => {
+/*app.use(morgan((tokens, req, res) => {
   const timestamp = new Date().toLocaleTimeString('en-US', { hour12: false })
   
   log.info([
@@ -21,7 +21,7 @@ app.use(morgan((tokens, req, res) => {
     tokens.status(req, res), '-',
     tokens['response-time'](req, res) + 'ms'
   ].join(' '), { service: 'web' })
-}))
+}))*/
 
 // Routes
 import './routes'

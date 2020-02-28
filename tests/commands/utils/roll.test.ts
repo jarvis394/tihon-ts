@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 import { Update } from '../../mocks'
 
+beforeAll(() => { require('../../../src/startup/aliases') })
+
 const n1 = 5,
   n2 = 100
 

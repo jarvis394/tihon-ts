@@ -16,7 +16,7 @@ exports.run = async ({ update, args }) => {
   
   // Return if no arguments
   if (!commandName) {
-    throw new Error('Введи команду')
+    return update.reply('Введи команду')
   } 
   // Find 'list' command in aliases
   else if (commandName === 'list' || list.alias.some(e => e === commandName)) {
@@ -28,7 +28,7 @@ exports.run = async ({ update, args }) => {
   } 
   // Return error if no command was found
   else {
-    throw new Error('✖️ Нет такой команды!')
+    return update.reply('✖️ Нет такой команды!')
   }
 
   // Subtract money for using mention mode 

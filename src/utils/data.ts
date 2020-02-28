@@ -2,8 +2,8 @@ import log from '@globals/log'
 import { MessagesGetConversationsResponse } from 'vk-io'
 import path from 'path'
 
-const rel = __filename.split(path.sep).some(e => e === 'dist') ? '../../../' : '../../'
-      
+const rel: string = __filename.split(path.sep).some(e => e === 'dist') ? '../../../' : '../../'
+
 /**
  * Returns dialogs list
  */

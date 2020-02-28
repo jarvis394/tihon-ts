@@ -7,7 +7,7 @@ export const run = async ({ update, args }) => {
   try {
     resp = math.evaluate(calc)
   } catch (e) {
-    throw new Error('Похоже, я слишком тупой для таких примеров')
+    return update.reply('Похоже, я слишком тупой для таких примеров')
   }
 
   return update.reply(`📥 Ввод: ${calc}\n📤 Результат: ${resp}`)

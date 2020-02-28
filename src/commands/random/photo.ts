@@ -12,11 +12,13 @@ exports.run = async ({ update }) => {
   async function getMsg() {
     var Dialog = randomArray(Dialogs.items)
 
-    const data = db
+    let data = db
       .prepare(
         `SELECT * FROM main.dialogs WHERE id = ${Dialog.conversation.peer.id}`
       )
-      .get() || { canReadMessages: true }
+      .get()
+
+    if (!data || data.canReadMessages === false) data = { canReadMessages: true }
 
     while (!data.canReadMessages) {
       Dialog = randomArray(Dialogs.items)
@@ -64,5 +66,5 @@ exports.command = {
   },
   alias: ['фото', 'фотка'],
   group: 'random',
-  hidden: true
+  hidden: false
 }

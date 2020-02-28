@@ -19,8 +19,8 @@ export default async (
   } else return
 
   // Load message payload if found
-  if (update.hasForwards || update.hasAttachments()) {
-    await update.loadMessagePayload()
+  if (text && (update.hasForwards || update.hasReplyMessage ||  update.hasAttachments())) {
+    // await update.loadMessagePayload()
   }
 
   // Remove mention from message text if it is mentioned

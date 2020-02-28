@@ -1,5 +1,8 @@
 import { MessageContext } from 'vk-io'
 
+/**
+ * Interface which describes a language list
+ */
 interface LanguageList {
   en: string
   ru: string
