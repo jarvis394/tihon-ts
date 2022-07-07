@@ -25,7 +25,7 @@
     "is-url": "^1.2.4",
     "mathjs": "^6.5.0",
     "module-alias": "^2.2.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "reverse-line-reader": "^0.2.6",
     "vk-io": "^4.0.0-rc.20",
     "winston": "^3.2.1",
